@@ -4,7 +4,7 @@ import { ExtendedRequest } from "../types/custom";
 import { ApiError } from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
 import { asyncHandler } from "../utils/asyncHandler";
-import { nanoid } from "nanoid";
+import { v4 } from "uuid";
 
 const createShortLink = asyncHandler(
   async (req: ExtendedRequest, res: Response) => {
@@ -12,10 +12,10 @@ const createShortLink = asyncHandler(
     if ([originalLink].some((field) => field?.trim() === "")) {
       throw new ApiError(400, "Original and short link are required");
     }
-    const shortLink = nanoid()
+    const shortLink = v4().substring(0, 10);
     const createdLink = await ShortLink.create({
       originalLink,
-      shortLink ,
+      shortLink,
       creationDate,
       expiryDate,
       userID: req.user?._id,
