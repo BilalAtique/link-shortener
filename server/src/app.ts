@@ -16,6 +16,6 @@ import shortLinkRouter from "./routes/shortLink.routes";
 //routes declaration
 app.use("/api/users", userRouter);
 
-app.use("/api/short-link", shortLinkRouter);
+app.use("/api/short-links", shortLinkRouter);
 
 export default app;
