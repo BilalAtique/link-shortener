@@ -38,4 +38,24 @@ const getUserShortLinks = asyncHandler(
   }
 );
 
-export { createShortLink, getUserShortLinks };
+const deleteLinkById = asyncHandler(
+  async (req: ExtendedRequest, res: Response) => {
+    const linkId = req.params.id;
+    const shortLink = await ShortLink.findById(linkId);
+
+    if (!shortLink) throw new ApiError(404, "Link not found");
+
+    if (!shortLink._id.equals(req.user?._id))
+      throw new ApiError(403, "This link is not created by you");
+
+    const deletedLink = await ShortLink.findByIdAndDelete(linkId);
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, { deletedLink }, "Links deleted successfully")
+      );
+  }
+);
+
+export { createShortLink, getUserShortLinks, deleteLinkById };
