@@ -12,6 +12,6 @@ router.route("/").post(verifyJWT, createShortLink);
 
 router.route("/").get(verifyJWT, getUserShortLinks);
 
-router.route("/").delete(verifyJWT, deleteLinkById);
+router.route("/:id").delete(verifyJWT, deleteLinkById);
 
 export default router;

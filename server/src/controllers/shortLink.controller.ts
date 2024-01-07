@@ -47,7 +47,7 @@ const deleteLinkById = asyncHandler(
 
     if (!shortLink) throw new ApiError(404, "Link not found");
 
-    if (!shortLink._id.equals(req.user?._id))
+    if (shortLink.userID.toString() !== req.user?._id.toString())
       throw new ApiError(403, "This link is not created by you");
 
     const deletedLink = await ShortLink.findByIdAndDelete(linkId);
