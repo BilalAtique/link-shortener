@@ -1,9 +1,9 @@
 import { Response } from "express";
-import { ExtendedRequest } from "../types/custom";
-import { asyncHandler } from "../utils/asyncHandler";
 import { ShortLink } from "../models/shortLink.model";
+import { ExtendedRequest } from "../types/custom";
 import { ApiError } from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
+import { asyncHandler } from "../utils/asyncHandler";
 
 const createShortLink = asyncHandler(
   async (req: ExtendedRequest, res: Response) => {
@@ -21,8 +21,21 @@ const createShortLink = asyncHandler(
 
     return res
       .status(201)
-      .json(new ApiResponse(200, createdLink, "Link registered Successfully"));
+      .json(
+        new ApiResponse(200, { createdLink }, "Link registered Successfully")
+      );
   }
 );
 
-export { createShortLink };
+const getUserShortLinks = asyncHandler(
+  async (req: ExtendedRequest, res: Response) => {
+    const userLinks = await ShortLink.find({ userID: req.user?._id });
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, { userLinks }, "Links retrieved successfully")
+      );
+  }
+);
+
+export { createShortLink, getUserShortLinks };
