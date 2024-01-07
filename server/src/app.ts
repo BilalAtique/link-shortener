@@ -12,10 +12,13 @@ app.use(cookieParser());
 //routes import
 import userRouter from "./routes/user.routes";
 import shortLinkRouter from "./routes/shortLink.routes";
+import { redirectToOriginalURL } from "./controllers/shortLink.controller";
 
 //routes declaration
 app.use("/api/users", userRouter);
 
 app.use("/api/short-links", shortLinkRouter);
+
+app.get("/:shortLink", redirectToOriginalURL);
 
 export default app;

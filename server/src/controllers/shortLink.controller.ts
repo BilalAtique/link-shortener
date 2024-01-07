@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { ShortLink } from "../models/shortLink.model";
 import { ExtendedRequest } from "../types/custom";
 import { ApiError } from "../utils/ApiError";
@@ -58,4 +58,25 @@ const deleteLinkById = asyncHandler(
   }
 );
 
-export { createShortLink, getUserShortLinks, deleteLinkById };
+const redirectToOriginalURL = asyncHandler(
+  async (req: Request, res: Response) => {
+    const shortLink = req.params.shortLink;
+
+    const link = await ShortLink.findOne({ shortLink });
+
+    if (!link) throw new ApiError(404, "Link not found");
+    // Increment the click count or perform any analytics here if needed
+    link.visits++;
+    await link.save();
+
+    // Redirect to the original URL
+    return res.redirect(link.originalLink);
+  }
+);
+
+export {
+  createShortLink,
+  getUserShortLinks,
+  deleteLinkById,
+  redirectToOriginalURL,
+};
