@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom/dist";
+import register from "../../assets/register.svg";
 
 const Register = () => {
   return (
@@ -8,6 +9,7 @@ const Register = () => {
 
         <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
           <div className="max-w-md text-center"></div>
+          <img src={register} alt="Register" />
         </div>
 
         {/* <!-- Right Pane --> */}
@@ -67,7 +69,7 @@ const Register = () => {
             <div className="mt-4 text-sm text-gray-600 text-center">
               <p>
                 Does not have an account?{" "}
-                <Link to="/login" className="text-black hover:underline">
+                <Link to="/register" className="text-black hover:underline">
                   Sign up here
                 </Link>
               </p>

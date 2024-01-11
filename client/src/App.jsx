@@ -1,5 +1,32 @@
+import { Navigate } from "react-router-dom/dist";
+import Login from "./Pages/auth/Login";
+import Register from "./Pages/auth/Register";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+function Auth() {
+  return <Navigate to="/login" />;
+}
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <Auth>
+                {" "}
+                <h1>Hello</h1>{" "}
+              </Auth>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default App;

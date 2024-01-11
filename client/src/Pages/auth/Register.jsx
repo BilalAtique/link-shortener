@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom/dist";
 import register from "../../assets/register.svg";
 
 const Register = () => {
@@ -82,7 +83,12 @@ const Register = () => {
               </div>
             </form>
             <div className="mt-4 text-sm text-gray-600 text-center">
-              <p>Already have an account? </p>
+              <p>
+                Already have an account?{" "}
+                <Link to="/login" className="text-black hover:underline">
+                  Login here
+                </Link>
+              </p>
             </div>
           </div>
         </div>
