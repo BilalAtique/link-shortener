@@ -1,15 +1,33 @@
 import { Link } from "react-router-dom/dist";
-import register from "../../assets/register.svg";
+import dark from "../../assets/dark.svg";
+import { useState } from "react";
 
 const Register = () => {
+  const [fullName, setFullname] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://127.0.0.1:3000/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, fullName }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+  };
   return (
     <div>
       <div className="flex h-screen">
         {/* <!-- Left Pane --> */}
 
-        <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+        <div className="hidden lg:flex items-center justify-center flex-1 bg-gray-700 text-black">
           <div className="max-w-md text-center">
-            <img src={register} alt="Register" />
+            <img src={dark} alt="image" />
           </div>
         </div>
 
@@ -26,7 +44,12 @@ const Register = () => {
             <div className="mt-4 text-sm text-gray-600 text-center">
               <p>With email</p>
             </div>
-            <form action="#" method="POST" className="space-y-4">
+            <form
+              action="#"
+              onSubmit={handleSubmit}
+              method="POST"
+              className="space-y-4"
+            >
               {/* <!-- Your form elements go here --> */}
 
               <div>
@@ -41,6 +64,8 @@ const Register = () => {
                   id="email"
                   name="email"
                   className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -56,6 +81,8 @@ const Register = () => {
                   id="fullname"
                   name="fullname"
                   className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                  value={fullName}
+                  onChange={(e) => setFullname(e.target.value)}
                 />
               </div>
 
@@ -71,6 +98,8 @@ const Register = () => {
                   id="password"
                   name="password"
                   className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div>
