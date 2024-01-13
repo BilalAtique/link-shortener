@@ -23,23 +23,23 @@ const Register = () => {
     <div className="flex h-screen">
       {/* <!-- Left Pane --> */}
 
-      <div className="hidden lg:flex items-center justify-center flex-1 bg-gradient-to-r from-green-950 to-purple-950">
+      <div className="hidden lg:flex items-center justify-center flex-1 bg-gradient-to-r from-teal-950 to-purple-950">
         <img src={dark} alt="dark" />
       </div>
 
       {/* <!-- Right Pane --> */}
       <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-r from-purple-950 to-pink-950 shadow-2xl shadow-gray-950">
         <div className="max-w-md w-full p-7">
-          <h1 className="text-4xl font-bold mb-6 text-white text-center">
+          <h1 className="text-7xl my-10 font-bold mb-6 text-teal-700 drop-shadow-lg text-center">
+            SwiftShrink
+          </h1>
+          <h1 className="text-3xl font-bold mb-3 text-white text-center">
             Sign In
           </h1>
-          <h1 className="text-xl font-bold mb-6 text-white text-center">
+          <h1 className="text-xl mb-6 text-white text-center">
             Login to transform your lengthy links{" "}
           </h1>
 
-          <div className="mb-4 text-xl font-bold text-white text-center">
-            <p>With email</p>
-          </div>
           <form
             action="#"
             onSubmit={handleSubmit}
@@ -86,7 +86,7 @@ const Register = () => {
                 type="submit"
                 className="w-full mt-6 bg-slate-900 text-white font-bold text-lg p-2 rounded-md hover:bg-gray-900 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
               >
-                Sign Up
+                Sign In
               </button>
             </div>
           </form>
@@ -97,7 +97,7 @@ const Register = () => {
                 to="/register"
                 className="hover:underline text-purple-400 text-lg"
               >
-                Sign up
+                Sign Up
               </Link>
             </p>
           </div>
