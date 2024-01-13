@@ -25,12 +25,12 @@ const Register = () => {
       <div className="flex h-screen">
         {/* Left Pane */}
 
-        <div className="hidden lg:flex items-center justify-center flex-1 bg-gray-800">
+        <div className="hidden lg:flex items-center justify-center flex-1 bg-gradient-to-r from-green-950 to-purple-950">
           <img src={dark} alt="dark" />
         </div>
 
         {/* Right Pane */}
-        <div className="w-full bg-pink-950 lg:w-1/2 flex items-center justify-center">
+        <div className="w-full bg-pink-950 lg:w-1/2 flex items-center justify-center bg-gradient-to-r from-purple-950 to-pink-950 shadow-2xl shadow-gray-950">
           <div className="max-w-md w-full p-7">
             <h1 className="text-4xl font-bold mb-6 text-white text-center">
               Sign Up
