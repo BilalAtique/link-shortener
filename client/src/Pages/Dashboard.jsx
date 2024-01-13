@@ -4,7 +4,7 @@ import UrlDisplay from "../components/UrlDisplay";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col h-screen  bg-gradient-to-b from-purple-950 to-pink-950">
+    <div className="flex flex-col bg-gradient-to-b from-purple-950 to-pink-950">
       {/* Header */}
       <Header />
 
