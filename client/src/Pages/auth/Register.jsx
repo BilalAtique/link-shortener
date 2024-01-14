@@ -19,13 +19,15 @@ const Register = () => {
       body: JSON.stringify({ email, password, fullName }),
     });
 
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     if (!response.ok) {
       const data = await response.json();
       throw new Error(data?.message);
     }
   };
 
-  const mutation = useMutation({
+  const { mutate: register, isPending: loading } = useMutation({
     mutationFn: handleSubmit,
     onSuccess: async () => {
       toast.success("Successfully Registered!");
@@ -67,7 +69,7 @@ const Register = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                mutation.mutate();
+                register();
               }}
               className="space-y-4"
             >
@@ -125,8 +127,11 @@ const Register = () => {
               </div>
               <div>
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="w-full mt-6 bg-slate-900 text-white font-bold text-lg p-2 rounded-md hover:bg-gray-900 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+                  className={`w-full mt-6 bg-slate-900 text-white font-bold text-lg p-2 rounded-md hover:bg-gray-900 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 >
                   Sign Up
                 </button>

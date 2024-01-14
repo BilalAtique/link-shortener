@@ -64,8 +64,9 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
 const loginUser = asyncHandler(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  if (!email) {
-    throw new ApiError(400, "email is required");
+    if (!email || !password) {
+    // throw new ApiError(400, "All fields are required");
+    return res.status(400).json(new ApiResponse(400, {}, "All fields are required"));
   }
 
   const user = await User.findOne({
@@ -73,13 +74,15 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
   });
 
   if (!user) {
-    throw new ApiError(404, "User does not exist");
+    // throw new ApiError(404, "User does not exist");
+    return res.status(404).json(new ApiResponse(404, {}, "User does not exist"));
   }
 
   const isPasswordValid = await (user as any).isPasswordCorrect(password);
 
   if (!isPasswordValid) {
-    throw new ApiError(401, "Invalid user credentials");
+    // throw new ApiError(401, "Invalid user credentials");
+    return res.status(401).json(new ApiResponse(401, {}, "Invalid user credentials"));
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
