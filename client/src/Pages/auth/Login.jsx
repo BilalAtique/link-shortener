@@ -10,6 +10,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 3);
 
   const handleSubmit = async () => {
     const response = await fetch("http://127.0.0.1:3000/api/users/login", {
@@ -38,11 +40,13 @@ const Register = () => {
         path: "/",
         sameSite: "None",
         secure: true,
+        expires: expirationDate,
       });
       cookies.set("refreshToken", data?.data?.refreshToken, {
         path: "/",
         sameSite: "None",
         secure: true,
+        expires: expirationDate,
       });
       toast.success("Logged In!");
       await new Promise((resolve) => setTimeout(resolve, 3000));
