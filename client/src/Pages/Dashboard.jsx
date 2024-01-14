@@ -4,7 +4,7 @@ import UrlDisplay from "../components/UrlDisplay";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen">
       {/* Header */}
       <Header />
 
