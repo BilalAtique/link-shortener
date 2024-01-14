@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom/dist";
 import dark from "../../assets/dark.svg";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [fullName, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch("http://127.0.0.1:3000/api/users/register", {
+  const handleSubmit = async () => {
+    const response = await fetch("http://127.0.0.1:3000/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,9 +19,29 @@ const Register = () => {
       body: JSON.stringify({ email, password, fullName }),
     });
 
-    const data = await res.json();
-    console.log(data);
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data?.message);
+    }
   };
+
+  const mutation = useMutation({
+    mutationFn: handleSubmit,
+    onSuccess: async () => {
+      toast.success("Successfully Registered!");
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      navigate("/login");
+    },
+    onError: async (error) => {
+      toast.error(error?.message);
+    },
+    onSettled: () => {
+      setEmail("");
+      setPassword("");
+      setFullname("");
+    },
+  });
+
   return (
     <div>
       <div className="flex h-screen">
@@ -43,9 +65,10 @@ const Register = () => {
             </h1>
 
             <form
-              action="#"
-              onSubmit={handleSubmit}
-              method="POST"
+              onSubmit={(e) => {
+                e.preventDefault();
+                mutation.mutate();
+              }}
               className="space-y-4"
             >
               {/* Your form elements go here */}
@@ -58,7 +81,7 @@ const Register = () => {
                   Email
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   id="email"
                   name="email"
                   className="mt-1 p-2 w-full bg-slate-900 text-white border rounded-md focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-300 transition-colors duration-300"
