@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, useLocation } from "react-router-dom/dist";
+import Login from "./Pages/auth/Login";
+import Register from "./Pages/auth/Register";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./Pages/Dashboard";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-function App() {
-  const [count, setCount] = useState(0)
+function RequireAuth(props) {
+  let location = useLocation();
+  const access = cookies.get("accessToken");
+  const refresh = cookies.get("refreshToken");
+  if (!access || !refresh) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return props?.children;
 }
 
-export default App
+function LoggedIn(props) {
+  const access = cookies.get("accessToken");
+  const refresh = cookies.get("refreshToken");
+  if (access && refresh) {
+    return <Navigate to="/dashboard" />;
+  }
+
+  return props?.children;
+}
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+          <Route
+            path="/register"
+            element={
+              <LoggedIn>
+                <Register />
+              </LoggedIn>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <LoggedIn>
+                <Login />
+              </LoggedIn>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+export default App;
