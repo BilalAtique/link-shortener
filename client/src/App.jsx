@@ -1,11 +1,30 @@
-import { Navigate } from "react-router-dom/dist";
+import { Navigate, useLocation } from "react-router-dom/dist";
 import Login from "./Pages/auth/Login";
 import Register from "./Pages/auth/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-function Auth() {
-  return <Navigate to="/login" />;
+function RequireAuth(props) {
+  let location = useLocation();
+  const access = cookies.get("accessToken");
+  const refresh = cookies.get("refreshToken");
+  if (!access || !refresh) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return props?.children;
+}
+
+function LoggedIn(props) {
+  const access = cookies.get("accessToken");
+  const refresh = cookies.get("refreshToken");
+  if (access && refresh) {
+    return <Navigate to="/dashboard" />;
+  }
+
+  return props?.children;
 }
 
 const App = () => {
@@ -13,16 +32,29 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+          <Route
+            path="/register"
+            element={
+              <LoggedIn>
+                <Register />
+              </LoggedIn>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <LoggedIn>
+                <Login />
+              </LoggedIn>
+            }
+          />
           <Route
             path="/dashboard"
             element={
-              <Auth>
-                {" "}
-                <h1>Hello</h1>{" "}
-              </Auth>
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
             }
           />
         </Routes>
