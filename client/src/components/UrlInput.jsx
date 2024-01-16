@@ -35,9 +35,14 @@ const UrlInput = () => {
   const { mutate: shortenLink, isPending: loading } = useMutation({
     mutationFn: handleSubmit,
     onSuccess: async (data) => {
-      setShortLink(data?.data?.createdLink?.shortLink);
+      setShortLink(
+        "http://127.0.0.1:3000/" + data?.data?.createdLink?.shortLink
+      );
       toast.success("Link shortened!");
       queryClient.invalidateQueries({ queryKey: ["userLinks"] });
+    },
+    onSettled: () => {
+      setOriginalLink("");
     },
     onError: async (error) => {
       toast.error(error?.message);
