@@ -50,7 +50,7 @@ const UrlDisplay = () => {
               <NewLink
                 key={link._id}
                 index={index + 1}
-                shortenedLink={link.shortLink}
+                shortenedLink={"http://127.0.0.1:3000/" + link.shortLink}
                 originalLink={link.originalLink}
                 clicks={link.visits}
               />

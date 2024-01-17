@@ -22,7 +22,7 @@ This application offers a straightforward way to shorten long URLs, making them 
 Clone the repository:
 ```bash
 git clone https://github.com/BilalAtique/link-shortener.git
-```
+``````
 
 Install dependencies:
 ```bash
