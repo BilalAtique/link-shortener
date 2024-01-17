@@ -19,8 +19,6 @@ const Register = () => {
       body: JSON.stringify({ email, password, fullName }),
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     if (!response.ok) {
       const data = await response.json();
       throw new Error(data?.message);
@@ -31,7 +29,7 @@ const Register = () => {
     mutationFn: handleSubmit,
     onSuccess: async () => {
       toast.success("Successfully Registered!");
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 400));
       navigate("/login");
     },
     onError: async (error) => {

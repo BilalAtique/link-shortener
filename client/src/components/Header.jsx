@@ -15,7 +15,7 @@ const Header = () => {
         Authorization: `Bearer ${cookies.get("accessToken")}`,
       },
     });
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 100));
     if (!response.ok) {
       const data = await response.json();
       throw new Error(data?.message);
@@ -47,7 +47,11 @@ const Header = () => {
               login();
             }}
           >
-            <button type="submit" disabled={loading}>
+            <button
+              type="submit"
+              className="shadow-xl bg-black py-2 rounded-full hover:bg-gray-900"
+              disabled={loading}
+            >
               <li className="px-4 text-xl font-bold">Log Out</li>
             </button>
           </form>

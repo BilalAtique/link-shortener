@@ -22,7 +22,7 @@ const Register = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     const data = await response.json();
 
@@ -49,7 +49,6 @@ const Register = () => {
         expires: expirationDate,
       });
       toast.success("Logged In!");
-      await new Promise((resolve) => setTimeout(resolve, 3000));
       navigate("/dashboard");
     },
     onError: async (error) => {

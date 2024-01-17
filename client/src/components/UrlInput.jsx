@@ -21,7 +21,7 @@ const UrlInput = () => {
       body: JSON.stringify({ originalLink }),
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     const data = await response.json();
 
