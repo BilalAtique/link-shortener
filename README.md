@@ -21,8 +21,8 @@ This application offers a straightforward way to shorten long URLs, making them 
 ## Setup
 Clone the repository:
 ```bash
-https://github.com/Abdur-Rehman-Rehan/link-shortener.git
-```
+git clone https://github.com/BilalAtique/link-shortener.git
+``````
 
 Install dependencies:
 ```bash
