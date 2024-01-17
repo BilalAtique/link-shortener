@@ -67,6 +67,9 @@ const redirectToOriginalURL = asyncHandler(
     const link = await ShortLink.findOne({ shortLink });
 
     if (!link) throw new ApiError(404, "Link not found");
+    if (link.expiryDate) {
+      if (link.expiryDate < new Date()) throw new ApiError(404, "Link expired");
+    }
     // Increment the click count or perform any analytics here if needed
     link.visits++;
     await link.save();

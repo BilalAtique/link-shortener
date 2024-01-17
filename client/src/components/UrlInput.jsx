@@ -2,9 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const UrlInput = () => {
   const [originalLink, setOriginalLink] = useState("");
+  const [expireDate, setExpireDate] = useState(null);
   const [shortLink, setShortLink] = useState("");
   const queryClient = useQueryClient();
 
@@ -18,7 +22,7 @@ const UrlInput = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${cookies.get("accessToken")}`,
       },
-      body: JSON.stringify({ originalLink }),
+      body: JSON.stringify({ originalLink, expiryDate: expireDate }),
     });
 
     await new Promise((resolve) => setTimeout(resolve, 200));
@@ -70,6 +74,7 @@ const UrlInput = () => {
               onChange={(e) => setOriginalLink(e.target.value)}
               required
             />
+
             <button
               type="submit"
               disabled={loading}
@@ -77,6 +82,15 @@ const UrlInput = () => {
             >
               Get your Link
             </button>
+          </div>
+          <div className="flex justify-center mt-4">
+            <DatePicker
+              selected={expireDate}
+              onChange={(date) => setExpireDate(date)}
+              placeholderText="Enter Expire Date"
+              className="text-black px-4 py-2 rounded-full"
+              minDate={new Date()}
+            />
           </div>
         </form>
         <div className="p-5 text-2xl">
