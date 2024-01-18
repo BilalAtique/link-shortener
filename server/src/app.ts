@@ -19,6 +19,11 @@ app.use("/api/users", userRouter);
 
 app.use("/api/short-links", shortLinkRouter);
 
+app.get("/test", (req, res) => {
+  res.send("Hello World");
+});
+
 app.get("/:shortLink", redirectToOriginalURL);
+
 
 export default app;
