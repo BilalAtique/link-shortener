@@ -9,7 +9,7 @@ const Header = () => {
   const cookies = new Cookies();
 
   const handleSubmit = async () => {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/users/logout`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/users/logout`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${cookies.get("accessToken")}`,
