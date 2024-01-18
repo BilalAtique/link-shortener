@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 const UrlDisplay = () => {
   const cookies = new Cookies();
   const fetchLinks = async () => {
-    const response = await fetch("http://127.0.0.1:3000/api/short-links", {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/short-links`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies.get("accessToken")}`,
@@ -60,6 +60,8 @@ const UrlDisplay = () => {
               <th className="w-32 px-2 py-2 text-left">Shortened Link</th>
               <th className="w-32 px-2 py-2 text-left">Original Link</th>
               <th className="w-5 w py-1">Visits</th>
+              <th className="w-5 w py-1">Created Date</th>
+              <th className="w-5 w py-1">Expiry Date</th>
               <th className="w-4 py-1">Delete</th>
             </tr>
           </thead>
@@ -68,8 +70,10 @@ const UrlDisplay = () => {
               <NewLink
                 key={link._id}
                 index={index + 1}
-                shortenedLink={"http://127.0.0.1:3000/" + link.shortLink}
+                shortenedLink={import.meta.env.VITE_BASE_URL + link.shortLink}
                 originalLink={link.originalLink}
+                createdDate={link.creationDate}
+                expiryDate={link.expiryDate}
                 clicks={link.visits}
                 linkId={link._id}
               />

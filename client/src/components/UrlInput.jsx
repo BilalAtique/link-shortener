@@ -16,7 +16,7 @@ const UrlInput = () => {
 
   const handleSubmit = async () => {
     setShortLink("");
-    const response = await fetch("http://127.0.0.1:3000/api/short-links", {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/short-links`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const UrlInput = () => {
     mutationFn: handleSubmit,
     onSuccess: async (data) => {
       setShortLink(
-        "http://127.0.0.1:3000/" + data?.data?.createdLink?.shortLink
+        import.meta.env.VITE_BASE_URL + data?.data?.createdLink?.shortLink
       );
       toast.success("Link shortened!");
       queryClient.invalidateQueries({ queryKey: ["userLinks"] });

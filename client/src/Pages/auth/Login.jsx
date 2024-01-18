@@ -14,7 +14,7 @@ const Register = () => {
   expirationDate.setDate(expirationDate.getDate() + 3);
 
   const handleSubmit = async () => {
-    const response = await fetch("http://127.0.0.1:3000/api/users/login", {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

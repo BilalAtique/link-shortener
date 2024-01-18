@@ -9,7 +9,7 @@ const Header = () => {
   const cookies = new Cookies();
 
   const handleSubmit = async () => {
-    const response = await fetch("http://127.0.0.1:3000/api/users/logout", {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/users/logout`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${cookies.get("accessToken")}`,
@@ -52,7 +52,7 @@ const Header = () => {
               className="shadow-xl bg-black py-2 rounded-full hover:bg-gray-900"
               disabled={loading}
             >
-              <li className="px-4 text-xl font-bold">Log Out</li>
+              <li className="px-6 py-1 text-xl font-bold uppercase">Log Out</li>
             </button>
           </form>
         </ul>

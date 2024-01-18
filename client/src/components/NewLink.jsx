@@ -5,12 +5,20 @@ import { MdDeleteSweep } from "react-icons/md";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 
-const NewLink = ({ index, shortenedLink, originalLink, clicks, linkId }) => {
+const getFormattedDate = (date) => {
+  if(!date) return " - "
+  const currentDate = new Date(date);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return currentDate.toLocaleDateString(undefined, options);
+};
+
+
+const NewLink = ({ index, shortenedLink, originalLink, clicks, linkId, expiryDate, createdDate }) => {
   const queryClient = useQueryClient();
   const cookies = new Cookies();
   const deleteLink = async () => {
     const response = await fetch(
-      `http://127.0.0.1:3000/api/short-links/${linkId}`,
+      `${import.meta.env.VITE_BASE_URL}api/short-links/${linkId}`,
       {
         method: "DELETE",
         headers: {
@@ -68,6 +76,8 @@ const NewLink = ({ index, shortenedLink, originalLink, clicks, linkId }) => {
           {clicks}
         </div>
       </td>
+      <td  className=" border px-4 py-2">{getFormattedDate(createdDate)}</td>
+      <td className=" border px-4 py-2">{getFormattedDate(expiryDate)}</td>
       <td className="  px-4 py-2 ">
         <div className="flex justify-center">
           <button
