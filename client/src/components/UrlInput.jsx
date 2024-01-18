@@ -54,9 +54,11 @@ const UrlInput = () => {
   });
 
   return (
-    <div className="text-white max-w-[70%] min-w-[50%] mx-auto shadow-2xl shadow-gray-950 rounded-3xl">
+    <div className="text-white sm:max-w-[100%] md:max-w-[90%] lg:max-w-[70%] xl:max-w-[50%] min-w-[50%] sm:mx-auto shadow-2xl shadow-gray-950 rounded-3xl px-6 mx-4 md:px-8 lg:p-0">
       <div className="flex flex-col items-center h-full">
-        <h2 className="my-6 text-4xl text-white font-semibold">Short URL</h2>
+        <h2 className="my-6 text-2xl sm:text-4xl text-white font-semibold">
+          Short URL
+        </h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();

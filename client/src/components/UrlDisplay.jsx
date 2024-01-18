@@ -52,15 +52,15 @@ const UrlDisplay = () => {
 
   return (
     <div className="flex w-full p-12 justify-center">
-      <div className="p-10 text-white w-full md:w-[80%] shadow-2xl shadow-black rounded-3xl overflow-x-auto">
-        <table className="w-full">
+      <div className="pl-10 py-10 text-white w-full md:w-[80%] shadow-2xl shadow-black rounded-3xl overflow-x-auto">
+        <table className="w-full table-auto">
           <thead>
             <tr className="text-base md:text-lg lg:text-2xl">
               <th className="w-7 py-1">No.</th>
               <th className="w-32 px-2 py-2 text-left">Shortened Link</th>
               <th className="w-32 px-2 py-2 text-left">Original Link</th>
               <th className="w-5 w py-1">Visits</th>
-              <th className="w-4 py-1">Actions</th>
+              <th className="w-4 py-1">Delete</th>
             </tr>
           </thead>
           <tbody className="text-base">

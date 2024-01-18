@@ -49,11 +49,11 @@ const NewLink = ({ index, shortenedLink, originalLink, clicks, linkId }) => {
 
   return (
     <tr>
-      <td className="border px-4 py-2">{index}</td>
+      <td className=" border px-4 py-2">{index}</td>
       <td className="border px-4 py-2  ">
         {shortenedLink}
         <button
-          className=" px-4 py-2 text-white bg-black rounded-md ml-2 hover:bg-gray-500 hover:text-black"
+          className="  px-4 py-2 text-white bg-black rounded-md ml-2 hover:bg-gray-500 hover:text-black"
           onClick={() => {
             navigator.clipboard.writeText(shortenedLink);
             toast.success("Copied!");
@@ -62,19 +62,25 @@ const NewLink = ({ index, shortenedLink, originalLink, clicks, linkId }) => {
           <IoCopySharp />
         </button>
       </td>
-      <td className="border px-4 py-2">{originalLink}</td>
-      <td className="border px-4 py-2">{clicks}</td>
-      <td className="border px-4 py-2">
-        <button
-          disabled={loading}
-          className="text-red-600 py-2 justify-center border bg-black rounded-md px-4 hover:bg-red-600 hover:text-white onclick=disable"
-          onClick={(e) => {
-            e.preventDefault();
-            handleDelete();
-          }}
-        >
-          <MdDeleteSweep size={24} />
-        </button>
+      <td className=" border px-4 py-2">{originalLink}</td>
+      <td className=" border px-4 py-2">
+        <div className="flex justify-center text-2xl text-[#1cfc03]">
+          {clicks}
+        </div>
+      </td>
+      <td className="  px-4 py-2 ">
+        <div className="flex justify-center">
+          <button
+            disabled={loading}
+            className="text-red-600 py-2 justify-center border bg-black rounded-md px-4 hover:bg-red-600 hover:text-white onclick=disable"
+            onClick={(e) => {
+              e.preventDefault();
+              handleDelete();
+            }}
+          >
+            <MdDeleteSweep size={24} />
+          </button>
+        </div>
       </td>
     </tr>
   );
