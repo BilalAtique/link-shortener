@@ -8,7 +8,7 @@ const Dashboard = () => {
       {/* Header */}
       <Header />
 
-      <h1 className="text-7xl my-10 font-bold mb-6 text-teal-700 drop-shadow-lg text-center">
+      <h1 className="text-4xl md:text-7xl my-10 font-bold mb-6 text-teal-400 drop-shadow-lg text-center">
         SwiftShrink
       </h1>
 

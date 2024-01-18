@@ -54,7 +54,7 @@ const Register = () => {
         {/* Right Pane */}
         <div className="w-full bg-pink-950 lg:w-1/2 flex items-center justify-center bg-gradient-to-r from-purple-950 to-pink-950 shadow-2xl shadow-gray-950">
           <div className="max-w-md w-full p-7">
-            <h1 className="text-7xl my-10 font-bold mb-6 text-teal-700 drop-shadow-lg text-center">
+            <h1 className="text-7xl my-10 font-bold mb-6 text-teal-400 drop-shadow-lg text-center">
               SwiftShrink
             </h1>
             <h1 className="text-3xl font-bold mb-3 text-white text-center">
